@@ -1,0 +1,71 @@
+<project name="rad-builder" default="build-all" basedir=".">
+
+  <!-- Ant-Contrib (if, foreach, etc.) -->  
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    <classpath>
+      <pathelement location="C:/env/apache-ant-1.9.0/lib/ant-contrib-0.6.jar"/>
+    </classpath>
+  </taskdef>
+  
+  <property environment="env"/>
+  <property name="workspace" value="${env.workspace}"/>
+  
+  <target name="setup-workspace" description="Sets the preferences for the current workspace">
+    <!-- Some debug information -->
+    <echo level="verbose" message="rad.preferences.filename=${rad.preferences.filename}"/>
+    
+    <!-- Set the workspace preferences -->
+    <workspacePreferenceFile PreferenceFileName="${rad.preferences.filename}" useEclipsePrefs="${rad.preferences.useeclipseprefs}" overwrite="true"/>
+    <echo level="verbose" message="workspacePreferenceFile done"/>
+  </target>
+  
+  <target name="import-projects" depends="setup-workspace,copy-projects" description="Imports a set of projects into the current workspace">
+    <!-- Some debug information -->
+    <echo level="verbose" message="basedir=${basedir}"/>
+    <echo level="verbose" message="projects.name=${projects.name}"/>
+    
+    <!-- Import the projects -->
+    <foreach list="${projects.name}" target="import-project" param="project.name"/>
+  </target>
+  
+  <target name="import-project">
+    <!-- Some debug information -->
+    <echo level="verbose" message="project.name=${project.name}"/>
+    <echo level="verbose" message="workspace=${workspace}"/>
+    
+    <projectImport projectName="${project.name}" projectLocation="${workspace}/${project.name}"/>
+    <echo level="verbose" message="projectImport ${project.name} done"/>
+  </target>
+  
+  <target name="copy-projects" description="Copies the content of a folder to the current workspace">
+    <!-- Some debug information -->
+    <echo level="verbose" message="copy.from.path=${copy.from.path}"/>
+    <echo level="verbose" message="workspace=${workspace}"/>
+    
+    <copy todir="${workspace}" includeEmptyDirs="true">
+      <fileset dir="${copy.from.path}"/>
+    </copy>
+    <echo level="verbose" message="copy done"/>
+  </target>
+  
+  <target name="build-workspace" depends="import-projects" description="Builds the current workspace">
+    <!-- Fully build the workspace -->
+    <workspaceBuild BuildType="Full"/>
+    <echo level="verbose" message="workspaceBuild done"/>
+  </target>
+  
+  <target name="export-ear" depends="build-workspace" description="Exports the EAR defined by the ear.project.name/ear.filename properties">
+    <!-- Some debug information -->
+    <echo level="verbose" message="ear.filename=${ear.filename}"/>
+    <echo level="verbose" message="ear.project.name=${ear.project.name}"/>
+    
+    <!-- Export the EAR project as an EAR file -->
+    <earExport EARProjectName="${ear.project.name}" EARExportFile="${ear.filename}" ExportSource="true" IncludeProjectMetaFiles="true" Overwrite="true"/>
+    <echo level="verbose" message="earExport ${ear.filename} done"/>
+  </target>
+  
+  <target name="build-all" description="Builds an application from scratch">
+    <antcall target="export-ear"/>
+  </target>
+  
+</project>

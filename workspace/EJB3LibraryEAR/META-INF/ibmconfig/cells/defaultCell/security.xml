@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security:Security xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:security="http://www.ibm.com/websphere/appserver/schemas/5.0/security.xmi" xmi:id="Security_1212419683770">
+  <authDataEntries xmi:id="JAASAuthData_1212518990864" alias="DB_ALIAS" userId="" password="{xor}" description="A JAAS authentication entry automatically created for the unit test environment"/>
+</security:Security>

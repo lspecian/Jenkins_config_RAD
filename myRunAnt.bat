@@ -1,0 +1,2 @@
+set workspace=C:\env\workspace
+C:\"Arquivos de programas"\IBM\SDP\bin\runAnt.bat -Drad.preferences.filename=C:\env\workspace.epf -Drad.preferences.useeclipseprefs=true -Dprojects.name=EJB3Library,EJB3LibraryWeb,EJB3LibraryEAR -Dcopy.from.path=C:\env\workspace\EJB3Library -Dear.filename=EJB3Library.ear -Dear.project.name=EJB3LibraryEAR -verbose

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connections:connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:connections="http://www.ibm.com/websphere/wdo/connections">
+  <connection id="EJB3Library0602_1112">
+    <development xsi:type="connections:rsc-live-connection" id="EJB3Library0602_1112_dev" name="EJB3Library0602_1112"/>
+    <runtime xsi:type="connections:datasource-connection" auto-deploy="false" class-location="${DERBY_JDBC_DRIVER_PATH}/derby.jar" id="EJB3Library0602_1112_runtime" classname="org.apache.derby.jdbc.EmbeddedConnectionPoolDataSource" database-location="C:\DerbyDatabases\EJB3Library0602_1112" database-name="EJB3Library0602_1112" jndi-name="jdbc/EJB3Library0602_1112" resource-reference-name="EJB3Library0602_1112" server-name="derby:C:\DerbyDatabases\EJB3Library0602_1112" sql-vendor-type="50"/>
+  </connection>
+</connections:connections>
